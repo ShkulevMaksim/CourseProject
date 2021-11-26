@@ -22,7 +22,11 @@ public:
     SMatrix();
     SMatrix(int x,int y,const std::list<int>& elements);
     SMatrix(SMatrix & matrix_copy);
+    ~SMatrix();
     void print();
+    SMatrix& operator = (const SMatrix& mat);
+    SMatrix& operator + (SMatrix& mat);
+
 
 };
 
