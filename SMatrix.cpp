@@ -25,8 +25,8 @@ SMatrix::SMatrix(int y, int x, const std::list<int>& numbers):size_x(x),size_y(y
             }
         }
     }
-    catch(const MyException& ex){
-        std::cout<<"Exception is: "<<ex.what()<<'\n';
+    catch(...){
+        throw;
     }
 
 }
@@ -102,8 +102,8 @@ SMatrix SMatrix::operator+(const SMatrix &mat) {
         }
         return buffer ;
     }
-    catch(const MyException& ex){
-        std::cout<<"Exception is: "<<ex.what()<<'\n';
+    catch(...){
+        throw;
     }
 }
 
@@ -118,10 +118,9 @@ SMatrix SMatrix::operator-(const SMatrix &mat) {
         }
         return buffer ;
     }
-    catch(const MyException& ex){
-        std::cout<<"Exception is: "<<ex.what()<<'\n';
+    catch(...){
+        throw;
     }
-
 }
 
 SMatrix SMatrix::operator*(const SMatrix &mat) {
@@ -138,14 +137,9 @@ SMatrix SMatrix::operator*(const SMatrix &mat) {
             }
         }
         return buffer;}
-
-    catch(const MyException& ex){
-        std::cout<<"Exception is: "<<ex.what()<<'\n';
+    catch(...){
+        throw;
     }
-
-
-
-
 }
 
 bool SMatrix::sameSize(const SMatrix &mat) const {
@@ -166,7 +160,7 @@ SMatrix & SMatrix::operator--() {
     return *this;
 }
 
-const SMatrix & SMatrix::operator++(int) {
+const SMatrix  SMatrix::operator++(int) {
     SMatrix temp;
     for(auto it=matrix.begin();it!=matrix.end();++it){
         it->value++;
@@ -174,7 +168,7 @@ const SMatrix & SMatrix::operator++(int) {
     return temp;
 }
 
-const SMatrix & SMatrix::operator--(int) {
+const SMatrix  SMatrix::operator--(int) {
     SMatrix temp;
     for(auto it=matrix.begin();it!=matrix.end();++it){
         it->value--;
@@ -297,11 +291,6 @@ int **SMatrix::toArray() const {
     }
     return arr;
 }
-
-
-
-
-
 
 
 

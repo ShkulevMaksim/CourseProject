@@ -1,5 +1,5 @@
 //
-// Created by mksh2 on 21.11.2021.
+// Created by ShkulevMaksim on 21.11.2021.
 //
 
 #ifndef COURSEPROJECT_SMATRIX_H
@@ -30,12 +30,12 @@ private:
 
 public:
     SMatrix(); //Конструктор
-    SMatrix(int y,int x,const std::list<int>& elements); //Разные виды конструктора с параметрами (либо пустая матрица y на x либо заполенная)
+    SMatrix(int y,int x,const std::list<int>& elements); //Разные виды конструктора с параметрами (либо пустая матрица y на x либо замоленная)
     SMatrix(int y,int x);
     SMatrix(SMatrix & matrix_copy);  //Конструктор копий
     ~SMatrix(); //Деструктор
 
-    SMatrix& operator = (const SMatrix& mat);  //Переопределенные операторы присваивания, сложения/разности двух матриц, умножения матриц , умножения матрицы на число и числа на матрицу
+    SMatrix& operator = (const SMatrix& mat);  //Переопределенные операторы присваивания, сложения/разности двух матриц, умножения матриц, умножения матрицы на число и числа на матрицу
     SMatrix operator + (const SMatrix& mat);
     SMatrix operator - (const SMatrix& mat);
     SMatrix operator * (const SMatrix& mat);
@@ -51,9 +51,9 @@ public:
     SMatrix& operator *= (int num);
 
     SMatrix& operator ++ (); //Увеличения каждого элемента матрицы
-    const SMatrix& operator ++ (int);
+    const SMatrix operator ++ (int);
     SMatrix& operator -- (); //Уменьшение на 1 в префиксной/постфиксной форме
-    const SMatrix& operator -- (int);
+    const SMatrix operator -- (int);
 
 
     int operator() (int y, int x) const; //Взятие по координатам для чтения
