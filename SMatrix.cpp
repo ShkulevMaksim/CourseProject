@@ -13,7 +13,7 @@ SMatrix::SMatrix(int y, int x):size_x(x),size_y(y) {}
 
 SMatrix::SMatrix(int y, int x, const std::list<int>& numbers):size_x(x),size_y(y) {
     try{
-        if(numbers.size() != size_x*size_y){throw MyException("Wrong dimensions");}
+        if(numbers.size() != size_x*size_y){throw MyException("Wrong dimensions");} //Не знаю можно ли в конструкторы вставлять проверки
         int i=0;
         int j=0;
         for(auto it=numbers.begin(); it!=numbers.end();++it){
@@ -38,7 +38,7 @@ SMatrix::SMatrix(SMatrix &matrix_copy) {
    matrix= matrix_copy.matrix;
 }
 
-SMatrix::~SMatrix() = default;
+SMatrix::~SMatrix() = default; //Не стал расписывать деструктор, так как лист сам чистится
 
 
 
@@ -68,7 +68,7 @@ int &SMatrix::operator()(int y, int x) {
         }
     }
     matrix.emplace_back(y,x,NULL);
-    return this->operator()(y,x);
+    return this->operator()(y,x);     //Получается затратно, но я не смог придумать лучше решения
 
 }
 
@@ -125,7 +125,7 @@ SMatrix SMatrix::operator-(const SMatrix &mat) {
 }
 
 SMatrix SMatrix::operator*(const SMatrix &mat) {
-    try{if(this->size_x!=mat.size_y){throw MyException("Wrong dimensions for finding product");}
+    try{if(this->size_x!=mat.size_y){throw MyException("Wrong dimensions for finding product");} //Умножение методом итераций. Затратно, но работает
         SMatrix buffer(this->size_y,mat.size_x);
         int sum =0;
         for(int i=0;i<size_y;i++){
@@ -152,21 +152,21 @@ bool SMatrix::sameSize(const SMatrix &mat) const {
     return (mat.size_x==size_x && mat.size_y== size_y);
 }
 
-SMatrix SMatrix::operator++() {
+SMatrix & SMatrix::operator++() {
     for(auto it=matrix.begin();it!=matrix.end();++it){
         it->value++;
     }
     return *this;
 }
 
-SMatrix SMatrix::operator--() {
+SMatrix & SMatrix::operator--() {
     for(auto it=matrix.begin();it!=matrix.end();++it){
         it->value--;
     }
     return *this;
 }
 
-const SMatrix SMatrix::operator++(int) {
+const SMatrix & SMatrix::operator++(int) {
     SMatrix temp;
     for(auto it=matrix.begin();it!=matrix.end();++it){
         it->value++;
@@ -174,7 +174,7 @@ const SMatrix SMatrix::operator++(int) {
     return temp;
 }
 
-const SMatrix SMatrix::operator--(int) {
+const SMatrix & SMatrix::operator--(int) {
     SMatrix temp;
     for(auto it=matrix.begin();it!=matrix.end();++it){
         it->value--;
@@ -240,7 +240,7 @@ int SMatrix::getSizeX() const {
     return size_x;
 }
 
-SMatrix SMatrix::transpose() {
+SMatrix & SMatrix::transpose() {
     int t;
     for(int i = 0; i < size_y; ++i)
     {
@@ -254,21 +254,21 @@ SMatrix SMatrix::transpose() {
     return *this;
 }
 
-SMatrix SMatrix::operator+=(int num) {
+SMatrix& SMatrix::operator+=(int num) {
      for(auto it=matrix.begin();it!=matrix.end();++it){
         it->value+=num;
     }
     return *this;
 }
 
-SMatrix SMatrix::operator-=(int num) {
+SMatrix & SMatrix::operator-=(int num) {
     for(auto it=matrix.begin();it!=matrix.end();++it){
         it->value-=num;
     }
     return *this;
 }
 
-SMatrix SMatrix::operator*=(int num) {
+SMatrix & SMatrix::operator*=(int num) {
     for(auto it=matrix.begin();it!=matrix.end();++it){
         it->value*=num;
     }

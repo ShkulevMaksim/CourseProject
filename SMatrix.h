@@ -46,14 +46,14 @@ public:
     friend SMatrix operator + (int num,SMatrix& mat);
 
 
-    SMatrix operator += (int num); //Операторы накопления (действуют только на ненулевые элементы)
-    SMatrix operator -= (int num);
-    SMatrix operator *= (int num);
+    SMatrix& operator += (int num); //Операторы накопления (действуют только на ненулевые элементы)
+    SMatrix& operator -= (int num);
+    SMatrix& operator *= (int num);
 
-    SMatrix operator ++ (); //Увеличения каждого элемента матрицы
-    const SMatrix operator ++ (int);
-    SMatrix operator -- (); //Уменьшение на 1 в префиксной/постфиксной форме
-    const SMatrix operator -- (int);
+    SMatrix& operator ++ (); //Увеличения каждого элемента матрицы
+    const SMatrix& operator ++ (int);
+    SMatrix& operator -- (); //Уменьшение на 1 в префиксной/постфиксной форме
+    const SMatrix& operator -- (int);
 
 
     int operator() (int y, int x) const; //Взятие по координатам для чтения
@@ -73,7 +73,7 @@ public:
     bool operator==(const SMatrix &rhs) const; //Операторы сравнения
     bool operator!=(const SMatrix &rhs) const;
 
-    SMatrix transpose(); //Транспонирование
+    SMatrix& transpose(); //Транспонирование
 
     [[nodiscard]] int getSizeY() const; //Геттеры
     [[nodiscard]] int getSizeX() const;
